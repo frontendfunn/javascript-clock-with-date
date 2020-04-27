@@ -1,6 +1,6 @@
 # 😄 Javascript Clock with Date
 
-## 😃 Click here for the 👉 [💥LIVE DEMO]()
+## 😃 Click here for the 👉 [💥LIVE DEMO](https://frontendfunn.github.io/javascript-clock-with-date/)
 
 ---
 
