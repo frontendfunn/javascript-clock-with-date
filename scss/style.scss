@@ -1,0 +1,346 @@
+@import url("https://fonts.googleapis.com/css?family=Economica");
+
+body {
+  font-family: "Economica", sans-serif;
+  background-color: #212121;
+}
+.container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.clockContainer {
+  height: 300px;
+  width: 300px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 500px;
+  transform: rotate(90deg);
+  &::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    bottom: -50%;
+    left: -50%;
+    right: -50%;
+    margin: auto;
+    border: 15px solid #8c0b0a;
+    border-radius: 500px;
+    height: 110%;
+    width: 110%;
+    transform: rotate(45deg);
+    border-left-color: transparent;
+    border-top-color: transparent;
+  }
+}
+.hours {
+  list-style-type: none;
+  padding: 0;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  margin: auto;
+  height: 90%;
+  width: 90%;
+  border-radius: 500px;
+  background-color: #fcfcfc;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.9);
+  transition: all linear 1s;
+  li {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    height: 50%;
+    width: 0;
+    transform-origin: bottom;
+    box-sizing: border-box;
+    span {
+      font-weight: 600;
+      font-size: 1rem;
+      display: inline-block;
+      height: 50px;
+      width: 50px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 2rem;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        height: 0px;
+        width: 10px;
+        border: 1px solid #212121;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+  }
+  @for $i from 0 through 11 {
+    li:nth-child(#{($i) + 1}) {
+      transform: rotate(#{$i * 30}deg);
+      span {
+        transform: translateX(-50%) translateY(10px) rotate(-90deg);
+      }
+    }
+
+    @if (($i) %3 == 0) {
+      li:nth-child(#{($i) + 1}) {
+        span {
+          &::after {
+            width: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.seconds,
+.minutes {
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  left: -50%;
+  right: -50%;
+  margin: auto;
+  list-style-type: none;
+  border-radius: 500px;
+  padding: 0;
+  box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.9);
+  transition: all linear 1s;
+  li {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    height: 50%;
+    width: 0;
+    transform-origin: bottom;
+    box-sizing: border-box;
+    span {
+      font-weight: 600;
+      font-size: 1rem;
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      text-align: center;
+      line-height: 20px;
+      position: relative;
+    }
+  }
+  @for $i from 0 through 59 {
+    li:nth-child(#{($i) + 1}) {
+      transform: rotate(#{$i * 6}deg);
+      span {
+        transform: translateX(-50%) translateY(5px) rotate(-90deg);
+        &::after {
+          content: "";
+          position: absolute;
+          height: 0px;
+          width: 0.5px;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          right: -4px;
+        }
+      }
+    }
+    @if (($i) %5 == 0) {
+      li:nth-child(#{($i) + 1}) {
+        span {
+          &::after {
+            width: 4px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.seconds {
+  height: 130%;
+  width: 130%;
+  background-color: #fcfcfc;
+  z-index: -2;
+  li {
+    span {
+      &::after {
+        border: 1px solid #212121;
+      }
+    }
+  }
+}
+.minutes {
+  height: 110%;
+  width: 110%;
+  background-color: #323232;
+  z-index: -1;
+  color: #fff;
+  li {
+    span {
+      &::after {
+        border: 1px solid #fff;
+      }
+    }
+  }
+}
+
+.dots {
+  position: absolute;
+  background-color: #212121;
+  border: 10px solid #000;
+  height: 135%;
+  width: 135%;
+  top: -150%;
+  bottom: -150%;
+  left: -150%;
+  right: -150%;
+  margin: auto;
+  padding: 0;
+  list-style-type: none;
+  border-radius: 500px;
+  z-index: -5;
+  li {
+    position: absolute;
+    height: 50%;
+    width: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    transform-origin: bottom;
+    box-sizing: border-box;
+    &::after {
+      content: "";
+      position: absolute;
+      height: 3px;
+      width: 3px;
+      background-color: #fff;
+      border-radius: 500px;
+      left: 0;
+      right: 0;
+      top: 2px;
+      margin: auto;
+    }
+  }
+
+  @for $i from 0 through 59 {
+    li:nth-child(#{($i) + 1}) {
+      transform: rotate(#{$i * 6}deg);
+    }
+  }
+}
+
+.info {
+  height: 132%;
+  width: 132%;
+  border-radius: 500px;
+  background-image: linear-gradient(-90deg, transparent 50%, #000000 50%);
+  position: absolute;
+  top: -150%;
+  bottom: -150%;
+  left: -150%;
+  right: -150%;
+  margin: auto;
+  border-radius: 500px;
+  color: #fff;
+  transform: rotate(-90deg);
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    left: 50%;
+    height: 0;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    margin: auto;
+    transform: translateY(50%);
+    box-sizing: border-box;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    border-radius: 500px;
+    left: -50%;
+    right: -50%;
+    top: -50%;
+    bottom: -50%;
+    margin: auto;
+    z-index: -20px;
+  }
+  .today,
+  .time,
+  .day {
+    position: absolute;
+    padding: 10px 20px;
+    transform: translate(-100%);
+    display: inline-block;
+    left: 50%;
+    font-size: 1.5rem;
+  }
+  .today {
+    top: 60px;
+  }
+  .time {
+    top: 50%;
+    transform: translate(-100%) translateY(-50%);
+    font-size: 2.5rem;
+  }
+  .day {
+    bottom: 60px;
+  }
+}
+
+/*link*/
+.linkInfo {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  margin: auto;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  width: 200px;
+  font-size: 1.2rem;
+  a {
+    font-size: 3rem;
+    display: block;
+    color: inherit;
+  }
+}
+
+/*link*/
+.youtube {
+  position: fixed;
+  bottom: 30px;
+  right: 10px;
+  margin: auto;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  width: 200px;
+  font-size: 1.2rem;
+  a {
+    font-size: 3rem;
+    display: block;
+    color: inherit;
+  }
+}
